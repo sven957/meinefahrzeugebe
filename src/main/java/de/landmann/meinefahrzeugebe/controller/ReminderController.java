@@ -4,6 +4,7 @@ package de.landmann.meinefahrzeugebe.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Sort;
 
 import de.landmann.meinefahrzeugebe.entity.Reminder;
 import de.landmann.meinefahrzeugebe.entity.ReminderStatus;
@@ -23,8 +24,15 @@ public class ReminderController {
     private final ReminderService reminderService;
 
     @GetMapping
-    public List<Reminder> getAllReminders() {
-        return reminderService.getAllReminders();
+    public List<Reminder> getAllReminders(
+            @RequestParam(defaultValue = "dueDate") String sortBy,
+            @RequestParam(defaultValue = "asc") String sortDir
+    ) {
+        Sort sort = Sort.by(
+            sortDir.equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC,
+            sortBy
+        );
+        return reminderService.getAllReminders(sort);
     }
 
     @GetMapping("/{id}")

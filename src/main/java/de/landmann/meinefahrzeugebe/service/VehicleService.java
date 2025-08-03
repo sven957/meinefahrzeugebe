@@ -2,6 +2,7 @@ package de.landmann.meinefahrzeugebe.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Sort;
 
 import de.landmann.meinefahrzeugebe.entity.Vehicle;
 import de.landmann.meinefahrzeugebe.repository.VehicleRepository;
@@ -18,6 +19,10 @@ public class VehicleService {
     
     public List<Vehicle> getAllVehicles() {
         return vehicleRepository.findAll();
+    }
+    
+    public List<Vehicle> getAllVehicles(Sort sort) {
+        return vehicleRepository.findAll(sort);
     }
     
     public Optional<Vehicle> getVehicleById(Long id) {

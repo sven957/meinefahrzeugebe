@@ -2,6 +2,7 @@ package de.landmann.meinefahrzeugebe.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Sort;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -19,6 +20,10 @@ public class ReminderService {
 
     public List<Reminder> getAllReminders() {
         return reminderRepository.findAll();
+    }
+
+    public List<Reminder> getAllReminders(Sort sort) {
+        return reminderRepository.findAll(sort);
     }
 
     public Optional<Reminder> getReminderById(Long id) {

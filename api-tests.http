@@ -1,0 +1,54 @@
+### Register a new user
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "testuser2",
+  "password": "password123",
+  "email": "test2@example.com",
+  "firstName": "Test2",
+  "lastName": "User2"
+}
+
+### Login with existing user
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "password123"
+}
+
+### Get all vehicles (requires authentication)
+GET http://localhost:8080/api/vehicles
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTc1NDIzMzk4MiwiZXhwIjoxNzU0MzIwMzgyfQ.Xfrmtz8Z_XhcYOUD0jgkR6ghbh2iVCpndtXT4-RMpHo
+
+### Get vehicle by ID (requires authentication)
+GET http://localhost:8080/api/vehicles/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTc1NDIzMzk4MiwiZXhwIjoxNzU0MzIwMzgyfQ.Xfrmtz8Z_XhcYOUD0jgkR6ghbh2iVCpndtXT4-RMpHo
+
+### Create a new vehicle (requires authentication)
+POST http://localhost:8080/api/vehicles
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTc1NDIzMzk4MiwiZXhwIjoxNzU0MzIwMzgyfQ.Xfrmtz8Z_XhcYOUD0jgkR6ghbh2iVCpndtXT4-RMpHo
+
+{
+  "licensePlate": "T-ST 1234",
+  "brand": "Tesla",
+  "model": "Model 3",
+  "year": 2024,
+  "driverName": "Test Driver",
+  "driverEmail": "driver@example.com",
+  "leaseEndDate": "2027-12-31"
+}
+
+### Get all reminders (requires authentication)
+GET http://localhost:8080/api/reminders
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTc1NDIzMzk4MiwiZXhwIjoxNzU0MzIwMzgyfQ.Xfrmtz8Z_XhcYOUD0jgkR6ghbh2iVCpndtXT4-RMpHo
+
+### Test without authentication (should return 401)
+GET http://localhost:8080/api/vehicles
+Content-Type: application/json

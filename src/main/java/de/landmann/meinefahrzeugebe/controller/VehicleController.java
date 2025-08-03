@@ -3,6 +3,7 @@ package de.landmann.meinefahrzeugebe.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Sort;
 
 import de.landmann.meinefahrzeugebe.entity.Vehicle;
 import de.landmann.meinefahrzeugebe.service.VehicleService;
@@ -18,8 +19,15 @@ public class VehicleController {
     private final VehicleService vehicleService;
     
     @GetMapping
-    public List<Vehicle> getAllVehicles() {
-        return vehicleService.getAllVehicles();
+    public List<Vehicle> getAllVehicles(
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "asc") String sortDir
+    ) {
+        Sort sort = Sort.by(
+            sortDir.equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC, 
+            sortBy
+        );
+        return vehicleService.getAllVehicles(sort);
     }
     
     @GetMapping("/{id}")
